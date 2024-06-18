@@ -1,0 +1,87 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tiffins Notebook</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users' Daily Tiffins</h1>
+    
+    <!-- Add new user section -->
+    <div>
+        <h2>Add New User</h2>
+        <input type="text" id="newUsername" placeholder="Enter username">
+        <button onclick="addUser()"><i class="fas fa-plus"></i> Add User</button>
+    </div>
+
+    <!-- Tiffins table -->
+    <h2>All Tiffins</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Month</th>
+                <th>User</th>
+                <th>Tiffins</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in tiffins %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.month }}</td>
+                    <td>{{ entry.username }}</td>
+                    <td>{{ entry.tiffin_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add new tiffin entry section -->
+    <div>
+        <h2>Add New Tiffin Entry</h2>
+        <input type="text" id="newTiffin" placeholder="Enter tiffin number">
+        <input type="date" id="newDate">
+        <input type="month" id="newMonth">
+        <select id="userSelect">
+            {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <button onclick="addTiffin()"><i class="fas fa-plus"></i> Add Tiffin Entry</button>
+    </div>
+
+    <script>
+        // Example JavaScript functions for adding user and tiffin entries (replace with actual functionality)
+        function addUser() {
+            var newUsername = document.getElementById('newUsername').value;
+            // Perform AJAX request to backend to add new user
+            alert('Adding user: ' + newUsername);
+        }
+
+        function addTiffin() {
+            var newTiffin = document.getElementById('newTiffin').value;
+            var newDate = document.getElementById('newDate').value;
+            var newMonth = document.getElementById('newMonth').value;
+            var selectedUser = document.getElementById('userSelect').value;
+            // Perform AJAX request to backend to add new tiffin entry
+            alert('Adding tiffin: ' + newTiffin + ' for ' + selectedUser + ' on ' + newDate + ' - ' + newMonth);
+        }
+    </script>
+</body>
+</html>
